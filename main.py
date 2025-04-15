@@ -52,6 +52,7 @@ def setup_midi():
 def get_osc_parameters(n: int) -> list[str]:
     l = []
     l.append(f"/avatar/parameters/Key{n}")
+    l.append(f"/avatar/parameters/VP/Notes/Note{n}")
     notes = [
         ["C", ""],
         ["C", "up"],
