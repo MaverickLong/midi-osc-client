@@ -35,12 +35,12 @@ class dummy_out(object):
         pass
 
 def get_osc_parameters(n: int):
-            l = [f"/avatar/parameters/Key{n}", f"/avatar/parameters/VP/Notes/Note{n}"]
-            notes = [["C", ""], ["C", "up"], ["D", ""], ["D", "up"], ["E", ""], ["F", ""], ["F", "up"], ["G", ""], ["G", "up"], ["A", ""], ["A", "up"], ["B", ""]]
-            quotient = (n - 12) // 12
-            remainder = n % 12
-            l.append(f"/avatar/parameters/{notes[remainder][0]}{quotient}{notes[remainder][1]}")
-            return l
+    l = [f"/avatar/parameters/Key{n}", f"/avatar/parameters/VP/Notes/Note{n}"]
+    notes = [["C", ""], ["C", "up"], ["D", ""], ["D", "up"], ["E", ""], ["F", ""], ["F", "up"], ["G", ""], ["G", "up"], ["A", ""], ["A", "up"], ["B", ""]]
+    quotient = (n - 12) // 12
+    remainder = n % 12
+    l.append(f"/avatar/parameters/{notes[remainder][0]}{quotient}{notes[remainder][1]}")
+    return l
 
 def load_config():
     with open("config.json", "r") as f:

@@ -11,7 +11,7 @@ from ctypes import windll
 windll.shcore.SetProcessDpiAwareness(1)
 
 from pythonosc.udp_client import SimpleUDPClient
-from utils import load_config, save_config, get_osc_parameters, dummy_in, dummy_out, send_osc
+from utils import load_config, save_config, dummy_in, dummy_out, send_osc
 
 
 class AppModel:
@@ -81,7 +81,7 @@ class AppController:
     def on_midi_message(self, msg):
         self.queue.put(str(msg))
         self.out_device.send(msg)
-        self.send_osc(msg, self.client)
+        send_osc(msg, self.client)
 
     def start_dispatch_thread(self):
         self.midi_queue = queue.Queue()
@@ -89,10 +89,11 @@ class AppController:
             in_dev_name = self.model.config.get("midi_in_device")
             out_dev_name = self.model.config.get("midi_out_device")
 
-            self.in_device = dummy_in() if in_dev_name not in mido.get_input_names() else mido.open_input(in_dev_name, callback=self.on_midi_message)
-            self.out_device = dummy_out() if out_dev_name not in mido.get_output_names() else mido.open_output(out_dev_name)
             self.client = SimpleUDPClient(self.model.config["vrchat_receive_address"],
                                         self.model.config["vrchat_receive_port"])
+            self.in_device = dummy_in() if in_dev_name not in mido.get_input_names() else mido.open_input(in_dev_name, callback=self.on_midi_message)
+            self.out_device = dummy_out() if out_dev_name not in mido.get_output_names() else mido.open_output(out_dev_name)
+            
         except Exception as e:
             self.queue.put(f"[ERROR] {e}")
 

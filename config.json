@@ -2,5 +2,5 @@
     "vrchat_receive_port": 9000,
     "vrchat_receive_address": "127.0.0.1",
     "midi_in_device": "None (disabled)",
-    "midi_out_device": "Microsoft GS Wavetable Synth 0"
+    "midi_out_device": "None (disabled)"
 }
